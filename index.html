@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#0e0818" />
+  <title>Dhaka Dash · ঢাকা দৌড়</title>
+  <meta name="description" content="Help Rupa cross ten of Dhaka's wildest roads. A classic lane-crossing arcade game in English and Bengali." />
+  <style>
+    :root { --bg: #0e0818; --pad: #0b7a73; --pad-dark: #064a46; --accent: #b54f00; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: var(--bg); overflow: hidden; touch-action: none; overscroll-behavior: none; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+    body { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    #game { display: block; image-rendering: pixelated; image-rendering: crisp-edges; background: #000; }
+    #game.smooth { image-rendering: auto; }
+    #loading { position: fixed; inset: 0; display: grid; place-items: center; color: #ffd23a; font: 14px monospace; background: var(--bg); z-index: 5; }
+
+    /* On-screen touch controls (only on touch devices) */
+    #touch { display: none; width: 100%; padding: 8px 16px calc(10px + env(safe-area-inset-bottom)); justify-content: space-between; align-items: center; gap: 12px; }
+    .touch-device #touch { display: flex; }
+    .dpad { display: grid; grid-template-columns: repeat(3, 58px); grid-template-rows: repeat(3, 58px); gap: 4px; }
+    .dpad button, .side button { border: 2px solid #ffe9c8; border-radius: 12px; background: var(--pad); color: #fff; font: bold 22px sans-serif; box-shadow: 0 4px 0 var(--pad-dark); touch-action: none; padding: 0; }
+    .dpad button.down, .side button.down { transform: translateY(3px); box-shadow: 0 1px 0 var(--pad-dark); }
+    .dpad [data-dir="up"] { grid-column: 2; grid-row: 1; }
+    .dpad [data-dir="left"] { grid-column: 1; grid-row: 2; }
+    .dpad [data-dir="right"] { grid-column: 3; grid-row: 2; }
+    .dpad [data-dir="down"] { grid-column: 2; grid-row: 3; }
+    .side { display: flex; flex-direction: column; gap: 10px; }
+    .side button { width: 64px; height: 44px; font-size: 14px; background: var(--accent); box-shadow: 0 4px 0 #6a2e00; }
+    #rotate { display: none; color: #ffe9c8; font: 600 13px "Hind Siliguri", sans-serif; opacity: 0.75; margin: 10px 0 4px; text-align: center; }
+    /* Portrait phones: game at the top, controls underneath */
+    @media (orientation: portrait) {
+      .touch-device body { justify-content: flex-start; padding-top: calc(16px + env(safe-area-inset-top)); }
+      .touch-device #rotate { display: block; }
+      .touch-device #touch { margin-top: auto; padding-bottom: calc(28px + env(safe-area-inset-bottom)); }
+    }
+    /* Landscape phones: the game sits between the pads (main.js reserves the side space) */
+    @media (orientation: landscape) and (max-height: 500px) {
+      .touch-device #touch { position: fixed; inset: 0; pointer-events: none; padding: 0 calc(8px + env(safe-area-inset-right)) 0 calc(8px + env(safe-area-inset-left)); }
+      .touch-device #touch > * { pointer-events: auto; }
+      .dpad { grid-template-columns: repeat(3, 46px); grid-template-rows: repeat(3, 46px); }
+      .side button { width: 56px; height: 42px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">ঢাকা দৌড় · loading…</div>
+  <canvas id="game" width="640" height="360" aria-label="Dhaka Dash game"></canvas>
+  <div id="rotate">Rotate your phone for a bigger view · বড় করে দেখতে ফোন ঘোরাও</div>
+  <div id="touch" aria-hidden="true">
+    <div class="dpad">
+      <button data-dir="up" aria-label="Up">▲</button>
+      <button data-dir="left" aria-label="Left">◀</button>
+      <button data-dir="right" aria-label="Right">▶</button>
+      <button data-dir="down" aria-label="Down">▼</button>
+    </div>
+    <div class="side">
+      <button data-action="pause" aria-label="Pause">II</button>
+      <button data-action="confirm" aria-label="OK">OK</button>
+    </div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

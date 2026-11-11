@@ -1,0 +1,11 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+.DS_Store
+*.log
+reference/photos/
+.impeccable/
+.claude/
