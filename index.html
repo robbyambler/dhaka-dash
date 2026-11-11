@@ -4,8 +4,53 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
   <meta name="theme-color" content="#0e0818" />
-  <title>Dhaka Dash · ঢাকা দৌড়</title>
-  <meta name="description" content="Help Rupa cross ten of Dhaka's wildest roads. A classic lane-crossing arcade game in English and Bengali." />
+  <title>Dhaka Dash · ঢাকা দৌড় — a Dhaka street-crossing arcade game</title>
+  <meta name="description" content="Guide Rupa across ten busy Dhaka roads, from Dhanmondi to Sadarghat, dodging rickshaws, buses and CNGs. A free pixel-art arcade game in English and Bengali." />
+  <meta name="author" content="Robby Ambler" />
+  <link rel="canonical" href="https://robbyambler.github.io/dhaka-dash/" />
+
+  <!-- Icons + install manifest (relative paths so they work under /dhaka-dash/) -->
+  <link rel="icon" href="%BASE_URL%favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="%BASE_URL%favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="%BASE_URL%apple-touch-icon.png" />
+  <link rel="manifest" href="%BASE_URL%manifest.webmanifest" />
+
+  <!-- Link previews (Open Graph + Twitter) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Dhaka Dash" />
+  <meta property="og:title" content="Dhaka Dash · ঢাকা দৌড়" />
+  <meta property="og:description" content="Guide Rupa across ten busy Dhaka roads, from Dhanmondi to Sadarghat, dodging rickshaws, buses and CNGs. A free pixel-art arcade game in English and Bengali." />
+  <meta property="og:url" content="https://robbyambler.github.io/dhaka-dash/" />
+  <meta property="og:image" content="https://robbyambler.github.io/dhaka-dash/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Pixel-art night traffic at Gulshan-2 Circle in Dhaka, with the title Dhaka Dash and ঢাকা দৌড়" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="bn_BD" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dhaka Dash · ঢাকা দৌড়" />
+  <meta name="twitter:description" content="Guide Rupa across ten busy Dhaka roads, from Dhanmondi to Sadarghat, dodging rickshaws, buses and CNGs. A free pixel-art arcade game in English and Bengali." />
+  <meta name="twitter:image" content="https://robbyambler.github.io/dhaka-dash/og-image.png" />
+  <meta name="twitter:image:alt" content="Pixel-art night traffic at Gulshan-2 Circle in Dhaka, with the title Dhaka Dash and ঢাকা দৌড়" />
+
+  <!-- Structured data for search engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Dhaka Dash",
+    "alternateName": "ঢাকা দৌড়",
+    "description": "Guide Rupa across ten busy Dhaka roads, from Dhanmondi to Sadarghat, dodging rickshaws, buses and CNGs. A free pixel-art arcade game in English and Bengali.",
+    "url": "https://robbyambler.github.io/dhaka-dash/",
+    "image": "https://robbyambler.github.io/dhaka-dash/og-image.png",
+    "genre": "Arcade",
+    "gamePlatform": "Web browser",
+    "inLanguage": ["en", "bn"],
+    "author": { "@type": "Person", "name": "Robby Ambler", "url": "https://robbyambler.github.io/" },
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
   <style>
     :root { --bg: #0e0818; --pad: #0b7a73; --pad-dark: #064a46; --accent: #b54f00; }
     * { box-sizing: border-box; }
@@ -13,6 +58,8 @@
     body { display: flex; flex-direction: column; align-items: center; justify-content: center; }
     #game { display: block; image-rendering: pixelated; image-rendering: crisp-edges; background: #000; }
     #game.smooth { image-rendering: auto; }
+    /* Text for search engines and screen readers; invisible on screen */
+    .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
     #loading { position: fixed; inset: 0; display: grid; place-items: center; color: #ffd23a; font: 14px monospace; background: var(--bg); z-index: 5; }
 
     /* On-screen touch controls (only on touch devices) */
@@ -44,8 +91,16 @@
   </style>
 </head>
 <body>
+  <div class="sr-only">
+    <h1>Dhaka Dash · ঢাকা দৌড়</h1>
+    <p>Dhaka Dash is a free arcade game about crossing the road in Dhaka. You guide Rupa, a student with a backpack and an orange scarf, across ten busy streets while rickshaws, buses, CNG auto-rickshaws, motorbikes and trucks rush past. It plays in English and in Bengali.</p>
+    <p>The ten places are Dhanmondi Lake, New Market and Nilkhet, Shahbagh, Farmgate, Karwan Bazar, Hatirjheel, Mohakhali, Gulshan-2 Circle, Motijheel, and Sadarghat in Old Dhaka.</p>
+    <p>To play, use the arrow keys or WASD to hop one step at a time, watch the traffic, and wait for your gap. On a phone, use the on-screen buttons. Pick up tea and snacks along the way to sharpen your eyes and quicken your feet. You can switch between English and Bengali in the game.</p>
+    <p>ঢাকা দৌড় হলো রাস্তা পার হওয়ার একটি বিনামূল্যের আর্কেড গেম। রূপাকে ঢাকার দশটি ব্যস্ত রাস্তা পার করাতে হবে। খেলাটি বাংলা ও ইংরেজি দুই ভাষাতেই খেলা যায়।</p>
+  </div>
+  <noscript>Dhaka Dash needs JavaScript to run. Turn it on in your browser to help Rupa cross ten of Dhaka's busiest roads. · ঢাকা দৌড় খেলতে JavaScript চালু করতে হবে।</noscript>
   <div id="loading">ঢাকা দৌড় · loading…</div>
-  <canvas id="game" width="640" height="360" aria-label="Dhaka Dash game"></canvas>
+  <canvas id="game" width="640" height="360" role="img" aria-label="Dhaka Dash, an arcade game where Rupa hops across busy Dhaka streets. Use arrow keys or WASD to play."></canvas>
   <div id="rotate">Rotate your phone for a bigger view · বড় করে দেখতে ফোন ঘোরাও</div>
   <div id="touch" aria-hidden="true">
     <div class="dpad">
